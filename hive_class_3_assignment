@@ -1,1 +1,97 @@
+#####################1:Calculatye total sales per year:
+solution:
+
+command used: select year_id,sum(sales) as total_sales from sales_data_orc group by year_id;
+
+output:
+2003    3516979.547241211
+2004    4724162.593383789
+2005    1791486.7086791992
+
+
+#####################2.Find a product for which maximum orders were placed
+solution:select productline,sum(quantityordered) from sales_data_orc group by productline;
+
+
+--select  max(total_order) from (select productline,sum(quantityordered) as total_order  from sales_data_orc group by productline) t2;
+
+
+--select productline from (select productline ,sum(quantityordered) as total_order from sales_data_orc group by productline) t1;
+
+
+--select productline from sales_data_orc where max(quantityordered) in (select productline,sum(quantityordered) from sales_data_orc group by productline);
+
+Classic Cars     33992
+Motorcycles      11663
+Planes           10727
+Ships            8127
+Trains           2712
+Trucks and Buses 10777
+Vintage Cars     21069
+
+
+#################3.Calculate the total sales for each quarter
+solution:select qtr_id,sum(sales) from sales_data_orc group by qtr_id;
+
+output
+1       2350817.726501465
+2       2048120.3029174805
+3       1758910.808959961
+4       3874780.010925293
+
+
+################4.In which quarter sales was minimum
+
+
+
+
+
+
+################5.In which country sales was maximum and in which country sales was minimum
+select sum(sales),country from sales_data_orc group by country;
+
+
+
+
+
+
+630623.0987548828       Australia
+202062.53033447266      Austria
+108412.61962890625      Belgium
+224078.55993652344      Canada
+245637.15063476562      Denmark
+329581.91033935547      Finland
+1110916.5217895508      France
+220472.0897216797       Germany
+57756.43029785156       Ireland
+374674.3109741211       Italy
+188167.81060791016      Japan
+307463.69970703125      Norway
+94015.73046875  Philippines
+288488.4102783203       Singapore
+1215686.9223632812      Spain
+210014.21020507812      Sweden
+117713.55859375 Switzerland
+478880.45892333984      UK
+3627982.825744629       USA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
