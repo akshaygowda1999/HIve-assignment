@@ -10,7 +10,7 @@ output:
 
 
 #####################2.Find a product for which maximum orders were placed
-solution:select productline  from (select  productline,sum(quantityordered) from sales_data_orc group by productline order by productline) t1 limit 1;
+solution:select productline  from (select  productline,sum(quantityordered) as total_order from sales_data_orc group by productline order by total_order DESC) t1 limit 1;
 
 output:
 Classic Cars   
@@ -38,32 +38,18 @@ output:
 
 
 ################5.In which country sales was maximum and in which country sales was minimum
-select sum(sales) as total_sales,country from sales_data_orc group by country order by total_sales;
+solution(max sale country):select country as country_with_maxsales from (select sum(sales) as total_sales,country from sales_data_orc group by country order by total_sales DESC) t1 limit 1
+
+output:USA
+
+solution(min sale country)select country as country_with_minsales from (select sum(sales) as total_sales,country from sales_data_orc group by country order by total_sales) t1 limit 1;
+
+output:Ireland
 
 
 
 
 
-
-630623.0987548828       Australia
-202062.53033447266      Austria
-108412.61962890625      Belgium
-224078.55993652344      Canada
-245637.15063476562      Denmark
-329581.91033935547      Finland
-1110916.5217895508      France
-220472.0897216797       Germany
-57756.43029785156       Ireland
-374674.3109741211       Italy
-188167.81060791016      Japan
-307463.69970703125      Norway
-94015.73046875  Philippines
-288488.4102783203       Singapore
-1215686.9223632812      Spain
-210014.21020507812      Sweden
-117713.55859375 Switzerland
-478880.45892333984      UK
-3627982.825744629       USA
 
 
 
