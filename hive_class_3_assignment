@@ -10,24 +10,11 @@ output:
 
 
 #####################2.Find a product for which maximum orders were placed
-solution:select productline,sum(quantityordered) from sales_data_orc group by productline;
+solution:select productline  from (select  productline,sum(quantityordered) from sales_data_orc group by productline order by productline) t1 limit 1;
 
+output:
+Classic Cars   
 
---select  max(total_order) from (select productline,sum(quantityordered) as total_order  from sales_data_orc group by productline) t2;
-
-
---select productline from (select productline ,sum(quantityordered) as total_order from sales_data_orc group by productline) t1;
-
-
---select productline from sales_data_orc where max(quantityordered) in (select productline,sum(quantityordered) from sales_data_orc group by productline);
-
-Classic Cars     33992
-Motorcycles      11663
-Planes           10727
-Ships            8127
-Trains           2712
-Trucks and Buses 10777
-Vintage Cars     21069
 
 
 #################3.Calculate the total sales for each quarter
@@ -41,14 +28,17 @@ output
 
 
 ################4.In which quarter sales was minimum
+solution:
+
+select qtr_id from (select qtr_id,sum(sales) as total_sales from sales_data_orc group by qtr_id order by total_sales) a limit 1;
 
 
-
-
+output:
+3      
 
 
 ################5.In which country sales was maximum and in which country sales was minimum
-select sum(sales),country from sales_data_orc group by country;
+select sum(sales) as total_sales,country from sales_data_orc group by country order by total_sales;
 
 
 
