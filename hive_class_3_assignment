@@ -122,38 +122,19 @@ USA             1443852.669128418       4
 
 #############7.Find a month for each year in which maximum number of quantities were sold:
 
+solution:
+select year_id,month_id,quantity from 
+(select *,rank() over (partition by year_id order by quantity desc)rnk from 
+(select year_id,month_id,sum(QUANTITYORDERED) quantity from sales_data_orc  group by year_id,month_id order by year_id,month_id)a)b where rnk=1;
 
-select year_id,month_id,sum(QUANTITYORDERED) from sales_data_orc  group by year_id,month_id;
 
-2003    1       1357
-2003    2       1449
-2003    3       1755
-2003    4       1993
-2003    5       2017
-2003    6       1649
-2003    7       1725
-2003    8       1974
-2003    9       2510
-2003    10      5515
+
+
+output:
 2003    11      10179
-2003    12      2489
-2004    1       3245
-2004    2       3061
-2004    3       1978
-2004    4       2077
-2004    5       2618
-2004    6       2971
-2004    7       3174
-2004    8       4564
-2004    9       3171
-2004    10      5483
 2004    11      10678
-2004    12      3804
-2005    1       3395
-2005    2       3393
-2005    3       3852
-2005    4       2634
 2005    5       4357
+
 
 
 
